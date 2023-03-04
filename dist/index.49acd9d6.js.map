@@ -1,0 +1,1 @@
+{"mappings":"AAIY,IAJZ,MACEA,cAAe","sources":["src/app/script.js"],"sourcesContent":["class Generator {\r\n  constructor() {}\r\n}\r\n\r\nconst gen = new Generator();\r\n"],"names":["constructor"],"version":3,"file":"index.49acd9d6.js.map"}
