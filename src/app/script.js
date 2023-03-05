@@ -1,4 +1,6 @@
 class Generator {
+  #taskInfo = JSON.parse(localStorage.getItem("URLs")) || [];
+  #index = 0;
   constructor() {
     this.burger = document.querySelector(".burger");
     this.form = document.querySelector("form");
@@ -8,7 +10,7 @@ class Generator {
     this.generatedLinksContainer = document.querySelector(".generated--links");
     this.mainContainer = document.querySelector(".links--generator");
     this.validDomainTest =
-      /^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z]{2,}){1,}$/i;
+      /^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z]+){1,}(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
 
     this.burger.addEventListener("click", this._toggleMenuBar.bind(this));
     this.form.addEventListener("submit", this._submitForm.bind(this));
@@ -16,6 +18,7 @@ class Generator {
       "click",
       this._copyToClipboard.bind(this)
     );
+    this._renderGeneratedLink();
   }
 
   _toggleMenuBar() {
@@ -46,31 +49,54 @@ class Generator {
       const res = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`);
       const data = await res.json();
 
-      if (!res.ok) throw new Error("something went wrong");
+      if (!res.ok)
+        throw new Error(
+          "something went wrong, make sure your search query is inputted correctly!"
+        );
 
       const originalURL = data.result.original_link;
       const shortURL = data.result.full_short_link;
-      this._renderGeneratedLink(originalURL, shortURL);
+
+      this.#index++;
+
+      let storage = {
+        id: this.#index,
+        short_URL: shortURL,
+        long_URL: originalURL,
+      };
+
+      this.#taskInfo.push(storage);
+      // storing items into localStorage
+      localStorage.setItem("URLs", JSON.stringify(this.#taskInfo));
+
+      this._renderGeneratedLink();
     } catch (err) {
-      console.log(err.message);
+      console.log(
+        `Something went wrong, make sure you're connected to the internet ${err.message}`
+      );
     }
   }
 
-  _renderGeneratedLink(originalURL, shortURL) {
-    let html = `
-    <div class="link items-center justify-between p-5 lg:flex" draggable="true">
-        <p class="text-sm lg:text-base">
-          <a href="${originalURL}" target=_"blank">${originalURL}</a>
-        </p>
-         <div class="link--section--copy mt-2 flex flex-col border-t border-grayishViolet lg:mt-0 lg:flex-row lg:items-center lg:border-none">
-          <p class="cursor-pointer py-2 text-xs text-cyan hover:underline lg:py-0 lg:pr-2 lg:text-sm">
-           <a href="${shortURL}" target=_"blank">${shortURL}</a>
-          </p>
-            <button class="copy w-full rounded bg-cyan px-5 py-2 text-sm text-white lg:w-auto">Copy</button>
-        </div>
-  </div>`;
+  _renderGeneratedLink() {
+    let html = "";
+    if (this.#taskInfo) {
+      this.#taskInfo.forEach((task) => {
+        html += `
+        <div class="link items-center justify-between p-5 lg:flex" draggable="true">
+            <p class="text-sm lg:text-base">
+              <a href="${task.long_URL}" target=_"blank">${task.long_URL}</a>
+            </p>
+             <div class="link--section--copy mt-2 flex flex-col border-t border-grayishViolet lg:mt-0 lg:flex-row lg:items-center lg:border-none">
+              <p class="cursor-pointer py-2 text-xs text-cyan hover:underline lg:py-0 lg:pr-2 lg:text-sm">
+               <a href="${task.short_URL}" target=_"blank">${task.short_URL}</a>
+              </p>
+                <button class="copy w-full rounded bg-cyan px-5 py-2 text-sm text-white lg:w-auto">Copy</button>
+            </div>
+      </div>`;
+      });
 
-    this.generatedLinksContainer.insertAdjacentHTML("beforebegin", html);
+      this.generatedLinksContainer.innerHTML = html;
+    }
   }
 
   _copyToClipboard(e) {
@@ -78,14 +104,12 @@ class Generator {
     if (!copyBtn) return;
 
     // accessing the shortURL index / position
-    const link =
-      copyBtn.parentElement.previousElementSibling.textContent.trim();
+    const link = copyBtn.previousElementSibling.textContent.trim();
 
     // copy text to clipboard
     navigator.clipboard
       .writeText(link)
       .then(() => {
-        console.log(`Copied "${link}" to clipboard`);
         copyBtn.textContent = "Copied!";
         copyBtn.style.backgroundColor = "hsl(257, 27%, 26%)";
 
@@ -105,11 +129,9 @@ class Generator {
 
     if (this._inputValidator()) {
       this._fetchRequest(this.input.value);
-      console.log("submitted!");
       this.input.value = "";
     } else {
       this._throwError();
-      console.log("wrong format!");
     }
   }
 }
