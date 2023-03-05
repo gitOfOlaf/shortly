@@ -46,10 +46,11 @@ body {
 }
 
 button:hover {
-  opacity: 0.5;
+  background-color: cyan;
 }
 
 .mobile-menu,
-.burger > div {
+.burger > div,
+.copied {
   transition: transform 1s ease-in-out;
 }
