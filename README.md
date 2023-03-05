@@ -34,12 +34,15 @@ Your users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](<./src//screenshots/Screenshot%20(138).png>)
+![](<./src//screenshots/Screenshot%20(139).png>)
+![](<./src//screenshots/Screenshot%20(140).png>)
+![](<./src//screenshots/Screenshot%20(141).png>)
 
 ### Links
 
-- Solution URL: [Solution URL here](https://your-solution-url.com)
-- Live Site URL: [Live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution URL here](https://www.frontendmentor.io/solutions/url-shortener-built-using-tailwind-vanilla-js-html-sass-parcel-niSwvRnJfo)
+- Live Site URL: [Live site URL here](https://shortcutlify.netlify.app/)
 
 ## My process
 
@@ -48,42 +51,55 @@ Your users should be able to:
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
+- Scss / Sass
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- Vanilla JS
+- [Tailwind](https://tailwindcss.com/docs/installation) - CSS Framework
+- [Parcel](https://parceljs.org/) - Build Tool
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+I learnt how to copy items unto the clipboard using the navigator.clipboard `API`
 
 ```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
+  _copyToClipboard(e) {
+    const copyBtn = e.target.closest(".copy");
+    if (!copyBtn) return;
+
+    // accessing the shortURL index / position
+    const link = copyBtn.previousElementSibling.textContent.trim();
+
+    // copy text to clipboard
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        copyBtn.textContent = "Copied!";
+        copyBtn.style.backgroundColor = "hsl(257, 27%, 26%)";
+
+        setTimeout(() => {
+          copyBtn.textContent = "Copy";
+          copyBtn.style.backgroundColor =
+            "hsl(180 66% 49% / var(--tw-bg-opacity))";
+        }, 1000);
+      })
+      .catch((error) => {
+        console.error(`Error copying text: ${error}`);
+      });
+  }
 ```
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+I'll continue developing myself in becoming a better programmer. I think I'm getting the hang of using OOP in my projects. If there's one visbile benefit of using OOP in any project, it's avoiding to write spaghetti codes.
+
+Using OOP paradigm makes coding so much easier and less complicated at least if one understands the concepts.
+I can easily come back to read my codes without really having to think much about what does what ever again!
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Tailwind](https://tailwindcss.com/docs/installation) - CSS Framework, used to build and style the website much faster.
+- [Parcel](https://parceljs.org/) - Build Tool, used for compiling and minifying my files
+- [ShrtCode](https://shrtco.de/) - API used to shorten URL's using the `GET` Request.
 
 ## Author
 
