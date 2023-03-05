@@ -22,7 +22,7 @@
   <body>
     <header class="w-full">
       <nav
-        class="mx-8 flex max-w-full items-center justify-between py-8 md:container md:mx-auto"
+        class="relative mx-8 flex max-w-full items-center justify-between py-8 md:container md:mx-auto"
       >
         <div class="leftmenu flex items-center gap-8">
           <img src="./images/logo.svg" alt="logo" />
@@ -37,6 +37,41 @@
               </li>
               <li class="text-grayishViolet hover:text-veryDarkBlue">
                 <a href="#">Resources</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="mobile-menu absolute top-[15vh] w-full max-w-full translate-x-[120%] rounded-lg bg-darkViolet p-5 lg:hidden"
+        >
+          <div class="menubtns mb-4">
+            <ul class="flex flex-col items-center justify-between gap-[1rem]">
+              <li class="text-white">
+                <a href="#">Features</a>
+              </li>
+              <li class="text-white">
+                <a href="#">Pricing</a>
+              </li>
+              <li class="text-white">
+                <a href="#">Resources</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="rightmenu border-t border-grayishViolet py-3">
+            <ul class="flex flex-col justify-between gap-[1rem] text-center">
+              <li class="text-white">
+                <a href="#">Login</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><button
+                    class="w-full rounded-full bg-cyan px-5 py-2 text-white"
+                  >
+                    Sign Up
+                  </button></a
+                >
               </li>
             </ul>
           </div>
@@ -103,7 +138,8 @@
         <section
           class="links--generator mx-auto flex max-w-[976px] flex-col gap-[1.5rem]"
         >
-          <div
+          <form
+            action=""
             class="shorten--links relative flex flex-col gap-[2rem] rounded bg-darkViolet p-[20px] lg:flex-row lg:items-center lg:justify-center"
           >
             <div class="input--section z-10 w-full lg:w-[80%]">
@@ -126,7 +162,7 @@
             <div
               class="bg-image absolute top-0 h-full w-full bg-[url('../images/bg-shorten-mobile.svg')] bg-cover bg-no-repeat lg:bg-[url('../images/bg-shorten-desktop.svg')]"
             ></div>
-          </div>
+          </form>
 
           <div class="generated--links w-full">
             <!-- todo: First Generated link -->
@@ -289,7 +325,7 @@
       </section>
     </main>
 
-    <!-- * banner section -->
+    <!-- todo: banner section -->
     <section
       class="banner relative mt-16 flex h-[150px] w-full flex-col items-center justify-center gap-[1rem] bg-darkViolet lg:mt-32 lg:h-[200px]"
     >
@@ -305,6 +341,7 @@
       ></div>
     </section>
 
+    <!-- todo: footer section -->
     <footer class="relative w-full bg-veryDarkViolet">
       <section
         class="footer--container mx-auto flex max-w-full flex-col items-center justify-center gap-[3rem] py-16 lg:container lg:flex-row lg:items-start lg:justify-between"

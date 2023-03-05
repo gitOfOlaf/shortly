@@ -24,8 +24,20 @@ body {
 .burger > div {
   width: 25px;
   height: 2px;
-  margin: 5px 0;
+  margin: 6px 0;
   background-color: $grayishViolet;
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+  opacity: 0;
+}
+
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
 .link,
@@ -37,6 +49,7 @@ button:hover {
   opacity: 0.5;
 }
 
-.special:hover {
-  background-color: hsla(180, 66%, 49%, 0.9);
+.mobile-menu,
+.burger > div {
+  transition: transform 1s ease-in-out;
 }
