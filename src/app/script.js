@@ -1,6 +1,6 @@
 class Generator {
   #taskInfo = JSON.parse(localStorage.getItem("URLs")) || [];
-  #index = 0;
+  #index = this.#taskInfo.length;
   constructor() {
     this.burger = document.querySelector(".burger");
     this.form = document.querySelector("form");
@@ -57,10 +57,8 @@ class Generator {
       const originalURL = data.result.original_link;
       const shortURL = data.result.full_short_link;
 
-      this.#index++;
-
       let storage = {
-        id: this.#index,
+        id: ++this.#index,
         short_URL: shortURL,
         long_URL: originalURL,
       };
