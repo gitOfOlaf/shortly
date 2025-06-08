@@ -13,7 +13,6 @@ This is a solution to the [Shortly URL shortening API Challenge challenge on Fro
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Author](#author)
 
 ## Overview
 
@@ -100,9 +99,3 @@ I can easily come back to read my codes without really having to think much abou
 - [Tailwind](https://tailwindcss.com/docs/installation) - CSS Framework, used to build and style the website much faster.
 - [Parcel](https://parceljs.org/) - Build Tool, used for compiling and minifying my files
 - [ShrtCode](https://shrtco.de/) - API used to shorten URL's using the `GET` Request.
-
-## Author
-
-- Website - [Abdullah Ayoola](https://github.com/abdullah43577)
-- Frontend Mentor - [@abdullah43577](https://www.frontendmentor.io/profile/abdullah43577)
-- Twitter - [@officialayo540](https://twitter.com/officialayo540)
